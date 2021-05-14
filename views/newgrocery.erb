@@ -1,0 +1,20 @@
+<% content_for :header_buttons do %>
+  <nav>
+    <ul>
+      <li><a href="/">cancel</a></li>
+    </ul>
+  </nav>
+<% end %>
+
+<form class="newgrocery standard-form" action="/grocery/edit" method="post">
+  <p>tick the recipes you'd like to add to the grocery list:</p>
+
+  <% @recipe_list.each do |name, recipe| %>
+    <label for="<%= name %>">
+      <input type="checkbox" name="<%= name %>" value="<%= name %>" id="<%= name %>"/>
+      <%= name %>
+    </label>
+  <% end %>
+
+  <button type="submit" name="create_grocery">create grocery list</button>
+</form>

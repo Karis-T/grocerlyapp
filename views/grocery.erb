@@ -1,0 +1,19 @@
+<% content_for :header_buttons do %>
+  <nav>
+    <ul>
+      <li><a href="/">view all recipes</a></li>
+      <li><a href="/grocery/edit">edit groceries</a></li>
+    </ul>
+  </nav>
+<% end %>
+
+<h2 class="grocery-heading">Today's Grocery List:</h2>
+
+<dl>
+  <% @grocery_finish.each do |catagory, items|%>
+    <dt><%= catagory %></dt>
+    <% items.each do |item| %>
+        <dd><%= item.join(" ") %></dd>
+    <% end %>
+    <% end %>
+</dl>

@@ -1,0 +1,15 @@
+<% content_for :header_buttons do %>
+  <nav>
+    <ul>
+      <li><a href="/">view all recipes</a></li>
+      <li><a href="/recipe/<%= @recipe_name %>">cancel</a></li>
+    </ul>
+  </nav>
+<% end %>
+
+<form class="standard-form alt-input" action="/recipe/<%= @recipe_name %>/image" method="post">
+  <label for="recipe_image">Copy and paste an image address:</label>
+    <input type="text" name="image" placeholder="eg. https://french_toast.png" id="recipe_image" size="72" required>
+
+    <button type="submit" name="add_image">add image</button>
+</form>

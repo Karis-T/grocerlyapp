@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Grocerly: Generate a list from your favorite recipes</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/whitespace-reset.css">
+    <link rel="stylesheet" href="/stylesheets/application.css">
+  </head>
+  <body>
+    <header>
+      <h1>Grocerly</h1>
+      <%== yield_content :header_buttons %>
+
+      <% if session[:success] %>
+        <div class="flash-message">
+          <p><%= session.delete(:success) %></p>
+        </div>
+      <% end %>
+
+      <% if session[:error] %>
+        <div class="flash-message error">
+          <p><%= session.delete(:error) %></p>
+        </div>
+      <% end %>
+
+    </header>
+    <main>
+    <%== yield %>
+    </main>
+  </body>
+</html>

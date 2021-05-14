@@ -1,0 +1,43 @@
+<% content_for :header_buttons do %>
+  <nav>
+    <ul>
+      <li><a href="/">view all recipes</a></li>
+      <li><form class="grocery-form" action="/grocery" method="post">
+        <button type="submit" name="finish">finish grocery list!</button>
+      </form></li>
+    </ul>
+  </nav>
+<% end %>
+
+<h2>Add to your Grocery List</h2>
+<form class="ingredient-list delete-recipe" action="/grocery/delete" method="post">
+<button type="delete" name="delete">delete grocery list</button>
+</form>
+
+<table class="ingredient-list">
+  <% @grocery_list.each_with_index do |hash, idx| %>
+  <tr>
+    <td><%= hash[:amount] %></td>
+    <td><%= hash[:name] %></td>
+    <td>#<%= hash[:tag] %></td>
+    <td>
+      <form action="/grocery/<%= idx %>/delete" method="post">
+      <button type="submit" name="delete">x delete</button>
+    </form>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<form class="ingredient-form" action="/grocery/edit/add" method="post">
+  <input type="text" name="amount" placeholder="enter amount" size="10">
+  <input type="text" name="name" placeholder="add extra items (eg. tissues)" size="25" required >
+  <select name="tag">
+    <option disabled selected>catagory</option>
+    <% CATAGORIES.each do |catagory| %>
+      <option name = "tag" value="<%= catagory %>"><%= catagory %></option>
+    <% end %>
+  </select>
+
+  <button type="submit" name="add">add item to list</button>
+</form>

@@ -1,0 +1,90 @@
+
+<% content_for :header_buttons do %>
+  <nav>
+    <ul>
+      <li><a tabindex="-1" href="/">view all recipes</a></li>
+    </ul>
+  </nav>
+<% end %>
+
+<% if @recipe[:image] %>
+
+  <style>
+    .recipe {
+      background: no-repeat center/100% url("<%= @recipe[:image] %>");
+    }
+  </style>
+  <a tabindex="-1" href="/recipe/<%= @recipe_name %>/image">
+    <div class="recipe">
+    </div>
+  </a>
+
+  <% else %>
+
+  <a tabindex="-1" href="/recipe/<%= @recipe_name %>/image">
+    <div class="recipe">
+      <div class="container">
+        add an image
+      </div>
+    </div>
+  </a>
+
+<% end %>
+
+<h2><%= @recipe_name %></h2>
+<form class="ingredient-list delete-recipe" action="/recipe/<%= @recipe_name %>/delete" method="post">
+<button tabindex="-1" type="delete" name="delete">delete recipe</button>
+</form>
+
+<table class="ingredient-list">
+  <% find_ids(@recipe).each do |id| %>
+
+  <tr>
+    <td><%= @recipe[id][:amount] %></td>
+    <td><%= @recipe[id][:name] %></td>
+    <td>#<%= @recipe[id][:tag] %></td>
+    <td>
+      <form action="/recipe/<%= @recipe_name %>/<%= id %>/delete" method="post">
+      <button tabindex="-1" type="submit" name="delete">x delete</button>
+    </form>
+    </td>
+  </tr>
+  <% end %>
+
+</table>
+
+<form class="ingredient-form" action="/recipe/<%= @recipe_name %>/ingredient" method="post">
+  <input type="text" name="amount" placeholder="enter amount" size="10" tabindex="0">
+  <input type="text" name="name" placeholder="enter ingredient (eg. milk)" size="25" required >
+  <select name="tag">
+    <option disabled selected>category</option>
+    <% CATAGORIES.each do |catagory| %>
+      <option name = "tag" value="<%= catagory %>"><%= catagory %></option>
+    <% end %>
+  </select>
+
+  <button type="submit" name="add">add ingredient</button>
+</form>
+
+<%= params[:method] %>
+
+<h3>Method</h3>
+
+<% if @recipe[:method] %>
+<table class="ingredient-list">
+    <tr>
+      <td>Link to recipe:</td>
+      <td><a href="<%= @recipe[:method] %>" target="_blank"><%= @recipe_name %></a></td>
+      <td><form action="/recipe/<%= @recipe_name %>/method/delete" method="post">
+        <button type="submit" name="delete">x delete</button>
+      </form></td>
+    </tr>
+</table>
+
+<% else %>
+  <form class="standard-form" action="/recipe/<%= @recipe_name %>/method" method="post">
+    <label for="method">Add a link to the recipe:</label>
+    <input type="text" name="method" size="74" placeholder="eg. https://www.recipetineats.com/french-toast/">
+    <button type="submit" name="add">add link</button>
+  </form>
+<% end %>

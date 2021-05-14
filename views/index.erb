@@ -1,0 +1,24 @@
+<% content_for :header_buttons do %>
+  <nav>
+    <ul>
+      <li><a href="/recipe/new">new recipe</a></li>
+      <li><a href="/grocery/new">new grocery list</a></li>
+    </ul>
+  </nav>
+<% end %>
+
+<ul>
+  <% @recipe_list.each do |name, recipe| %>
+    <li>
+      <a href="/recipe/<%= name %>">
+        <div class="recipe" <% if recipe[:image] %>style="background: no-repeat center/100% url(<%= recipe[:image] %>);" <% end %>><div class="container"><%= name %></div></div>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<% if session[:grocery] %>
+  <div class="index-link">
+    <a href="/grocery/edit">view grocery list</a>
+  </div>
+<% end %>

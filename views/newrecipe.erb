@@ -1,0 +1,14 @@
+<% content_for :header_buttons do %>
+  <nav>
+    <ul>
+      <li><a href="/">cancel</a></li>
+    </ul>
+  </nav>
+<% end %>
+
+<form class="standard-form alt-input" action="/" method="post">
+  <label for="recipe_name">Enter new recipe name:</label>
+    <input type="text" name="recipe_name" placeholder="eg. vegetable lasagna" id="recipe_name" size="75" required>
+
+    <button type="submit" name="create_recipe">create</button>
+</form>
