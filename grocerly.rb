@@ -33,11 +33,13 @@ CATAGORIES = [
 
 def catagorize(grocery_list)
   by_catagory = {}
-  grocery_list.each do |ingredient|
-    if by_catagory[ingredient[:tag]]
-      by_catagory[ingredient[:tag]] << [ingredient[:amount], ingredient[:name]]
-    else
-      by_catagory[ingredient[:tag]] = [[ingredient[:amount], ingredient[:name]]]
+  CATAGORIES.each do |catagory|
+    grocery_list.each do |ingredient|
+      if by_catagory[catagory] && catagory == ingredient[:tag]
+        by_catagory[catagory] << [ingredient[:amount], ingredient[:name]]
+      elsif !(by_catagory[catagory]) && catagory == ingredient[:tag]
+        by_catagory[catagory] = [[ingredient[:amount], ingredient[:name]]]
+      end
     end
   end
   alphabetize(by_catagory)
@@ -84,8 +86,8 @@ def recipe_name_error(recipe_name)
 end
 
 def ingredient_error(amount, name)
-  if amount.length > 7
-    "amount must be 1-7 characters"
+  if amount.length > 15
+    "amount must be 1-15 characters"
   elsif !(1..20).cover?(name.length)
     "name must be 1-20 characters"
   end
