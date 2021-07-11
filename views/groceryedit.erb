@@ -2,9 +2,7 @@
   <nav>
     <ul>
       <li><a href="/">view all recipes</a></li>
-      <li><form class="grocery-form" action="/grocery" method="post">
-        <button type="submit" name="finish">finish grocery list!</button>
-      </form></li>
+      <li><a href="/grocery">finish grocery list!</a></li>
     </ul>
   </nav>
 <% end %>
@@ -15,13 +13,13 @@
 </form>
 
 <table class="ingredient-list">
-  <% @grocery_list.each_with_index do |hash, idx| %>
+  <% @storage.view_grocery_list.each do |id, ingredient| %>
   <tr>
-    <td><%= hash[:amount] %></td>
-    <td><%= hash[:name] %></td>
-    <td>#<%= hash[:tag] %></td>
+    <td><%= ingredient[:amount] %></td>
+    <td><%= ingredient[:name] %></td>
+    <td>#<%= ingredient[:tag] %></td>
     <td>
-      <form action="/grocery/<%= idx %>/delete" method="post">
+      <form action="/grocery/<%= id %>/delete" method="post">
       <button type="submit" name="delete">x delete</button>
     </form>
     </td>
@@ -34,8 +32,8 @@
   <input type="text" name="name" placeholder="add extra items (eg. tissues)" size="25" required >
   <select name="tag">
     <option disabled selected>category</option>
-    <% CATAGORIES.each do |catagory| %>
-      <option name = "tag" value="<%= catagory %>"><%= catagory %></option>
+    <% CATEGORIES.each do |category| %>
+      <option name = "tag" value="<%= category %>"><%= category %></option>
     <% end %>
   </select>
 

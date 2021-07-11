@@ -6,9 +6,8 @@
     </ul>
   </nav>
 <% end %>
-
 <ul>
-  <% @recipe_list.each do |name, recipe| %>
+  <% @storage.all_recipes.each do |name, recipe| %>
     <li>
       <a href="/recipe/<%= name %>">
         <div class="recipe" <% if recipe[:image] %>style="background: no-repeat center/100% url(<%= recipe[:image] %>);" <% end %>><div class="container"><%= name %></div></div>
@@ -17,7 +16,7 @@
   <% end %>
 </ul>
 
-<% if session[:grocery] %>
+<% if @storage.view_grocery_list %>
   <div class="index-link">
     <a href="/grocery/edit">view grocery list</a>
   </div>

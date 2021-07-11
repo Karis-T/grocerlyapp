@@ -37,12 +37,12 @@
 </form>
 
 <table class="ingredient-list">
-  <% find_ids(@recipe).each do |id| %>
+  <% @storage.view_ingredients(@recipe_name).each do |id, recipe| %>
 
   <tr>
-    <td><%= @recipe[id][:amount] %></td>
-    <td><%= @recipe[id][:name] %></td>
-    <td>#<%= @recipe[id][:tag] %></td>
+    <td><%= recipe[:amount] %></td>
+    <td><%= recipe[:name] %></td>
+    <td>#<%= recipe[:tag] %></td>
     <td>
       <form action="/recipe/<%= @recipe_name %>/<%= id %>/delete" method="post">
       <button tabindex="-1" type="submit" name="delete">x delete</button>
@@ -58,8 +58,8 @@
   <input type="text" name="name" placeholder="enter ingredient (eg. milk)" size="25" required >
   <select name="tag">
     <option disabled selected>category</option>
-    <% CATAGORIES.each do |catagory| %>
-      <option name = "tag" value="<%= catagory %>"><%= catagory %></option>
+    <% CATEGORIES.each do |category| %>
+      <option name = "tag" value="<%= category %>"><%= category %></option>
     <% end %>
   </select>
 

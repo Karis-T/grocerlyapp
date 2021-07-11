@@ -10,8 +10,8 @@
 <h2 class="grocery-heading">Today's Grocery List:</h2>
 
 <dl>
-  <% @grocery_finish.each do |catagory, items|%>
-    <dt><%= catagory %></dt>
+  <% @storage.view_categorized_grocery_list.each do |category, items|%>
+    <dt><%= category %></dt>
     <% items.each do |item| %>
         <dd><%= item.join(" ") %></dd>
     <% end %>
